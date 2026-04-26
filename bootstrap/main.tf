@@ -78,13 +78,6 @@ resource "aws_sns_topic_policy" "bucket_notifications_policy" {
 }
 
 
-
-# # Set the ACL to private
-# resource "aws_s3_bucket_acl" "s3_bucket_acl1" {
-#   bucket = aws_s3_bucket.s3_bucket1.id
-#   acl    = "private"
-# }
-
 # Enable versioning on the S3 bucket
 resource "aws_s3_bucket_versioning" "s3_bucket_versioning1" {
   bucket = aws_s3_bucket.s3_bucket1.id
@@ -163,88 +156,28 @@ resource "aws_s3_bucket_public_access_block" "access_good_1" {
 
 # Create a DynamoDB table with server-side encryption using the existing KMS key
 resource "aws_dynamodb_table" "dynamodb_table1" {
-  name         = "customer_accounts"
+  name         = "dynamodb-table1"
   billing_mode = "PAY_PER_REQUEST"
-  hash_key     = "customer_id"
-  range_key    = "account_number"
+  hash_key     = "LockID"
   point_in_time_recovery {
     enabled = true
   }
 
   # Define all attributes first
   attribute {
-    name = "customer_id"
+    name = "LockID"
     type = "S"
   }
 
-  attribute {
-    name = "account_number"
-    type = "S"
-  }
+  # global_secondary_index {
+  #   name = "CustomerTransactionIndex"
+  #   key_schema {
+  #     attribute_name = "LockID"
+  #     key_type       = "HASH"
+  #   }
+  #   projection_type = "KEYS_ONLY"
+  # }
 
-  attribute {
-    name = "account_balance"
-    type = "N"
-  }
-
-  attribute {
-    name = "account_status"
-    type = "S"
-  }
-
-  attribute {
-    name = "branch_code"
-    type = "S"
-  }
-
-  attribute {
-    name = "product_type"
-    type = "S"
-  }
-
-  attribute {
-    name = "last_transaction_date"
-    type = "S"
-  }
-
-  global_secondary_index {
-    name = "CustomerTransactionIndex"
-    key_schema {
-      attribute_name = "customer_id"
-      key_type       = "HASH"
-    }
-    key_schema {
-      attribute_name = "last_transaction_date"
-      key_type       = "RANGE"
-    }
-    projection_type = "KEYS_ONLY"
-  }
-
-  global_secondary_index {
-    name = "BalanceIndex"
-    key_schema {
-      attribute_name = "account_status"
-      key_type       = "HASH"
-    }
-    key_schema {
-      attribute_name = "account_balance"
-      key_type       = "RANGE"
-    }
-    projection_type = "ALL"
-  }
-
-  global_secondary_index {
-    name = "BranchProductIndex"
-    key_schema {
-      attribute_name = "branch_code"
-      key_type       = "HASH"
-    }
-    key_schema {
-      attribute_name = "product_type"
-      key_type       = "RANGE"
-    }
-    projection_type = "ALL"
-  }
   server_side_encryption {
     enabled     = true
     kms_key_arn = aws_kms_key.mykey.arn
@@ -252,24 +185,6 @@ resource "aws_dynamodb_table" "dynamodb_table1" {
 
   tags = {
     Environment = "dev"
-    Name        = "customer_accounts_table"
+    Name        = "dynamodb-table1"
   }
 }
-
-# # Configure auto-scaling for the DynamoDB table's read capacity units
-# resource "aws_appautoscaling_target" "dynamodb_table1" {
-#   resource_id        = "table/${aws_dynamodb_table.dynamodb_table1.name}"
-#   scalable_dimension = "dynamodb:table:ReadCapacityUnits"
-#   service_namespace  = "dynamodb"
-#   min_capacity       = 1
-#   max_capacity       = 15
-# }
-
-# # Create a target tracking scaling policy for the DynamoDB table's read capacity units
-# resource "aws_appautoscaling_policy" "dynamodb_table1" {
-#   name               = "rcu-auto-scaling"
-#   service_namespace  = aws_appautoscaling_target.dynamodb_table1.service_namespace
-#   scalable_dimension = aws_appautoscaling_target.dynamodb_table1.scalable_dimension
-#   resource_id        = aws_appautoscaling_target.dynamodb_table1.resource_id
-#   policy_type        = "TargetTrackingScaling"
-# }

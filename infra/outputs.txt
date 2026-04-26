@@ -1,0 +1,2 @@
+curl ifconfig.me run this in the terminal to get your public ip address
+my pubip: 86.29.100.62

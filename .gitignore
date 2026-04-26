@@ -23,3 +23,5 @@ override.tf.json
 terraform.rc
 
 debu.txt
+output.txt
+ifconfig.me
