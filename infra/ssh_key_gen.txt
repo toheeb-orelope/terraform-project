@@ -1,0 +1,22 @@
+Generate rsa key pair with 4096 size and store location
+ssh-keygen -t rsa -b 4096 -f $env:USERPROFILE\.ssh\test
+
+Verify the in the directory
+dir $env:USERPROFILE\.ssh
+
+Display the content in the file
+Get-Content $env:USERPROFILE\.ssh\test.pub
+Get-Content $env:USERPROFILE\.ssh\test
+
+Verify if the key pair match
+ssh-keygen -y -f $env:USERPROFILE\.ssh\test
+
+Check the fingerprint
+ssh-keygen -lf $env:USERPROFILE\.ssh\test.pub
+
+Verify connection
+ssh -i $env:USERPROFILE\.ssh\test localhost
+
+Connect ec2
+ssh -i $env:USERPROFILE\.ssh\test ec2-user@<EC2_PUBLIC_IP>
+ssh -i ~/.ssh/test ec2-user@<your-public-ip>
