@@ -45,3 +45,5 @@ jobs:
 
       - name: Verify identity
         run: aws sts get-caller-identity
+    env:
+      TF_VAR_ec2_public_key: ${{ secrets.EC2_PUBLIC_KEY }}
