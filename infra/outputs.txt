@@ -8,5 +8,8 @@ public_subnet_1_id = "subnet-00100ec28613569e1"
 public_subnet_1_name = "public-subnet-1"
 public_subnet_2_id = "subnet-030166facef03220a"
 public_subnet_2_name = "public-subnet-2"
+rds_endpoint = "terraform-20260429115823769800000001.cmzys4mao8xz.us-east-1.rds.amazonaws.com:5432"
+vpc_id = "vpc-06ba775163e0176c3"
+rds_port = 5432
 
 ec2-user@ip-10-0-1-182 

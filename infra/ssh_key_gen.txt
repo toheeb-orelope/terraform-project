@@ -19,4 +19,9 @@ ssh -i $env:USERPROFILE\.ssh\test localhost
 
 Connect ec2
 ssh -i $env:USERPROFILE\.ssh\test ec2-user@<EC2_PUBLIC_IP>
-ssh -i ~/.ssh/test ec2-user@<your-public-ip>
+ssh -i ~/.ssh/test ec2-user@98.94.252.31
+ssh -i $env:USERPROFILE\.ssh\test ec2-user@98.94.252.31
+
+
+Reconnect with if instance change
+ssh-keygen -R 98.94.252.31

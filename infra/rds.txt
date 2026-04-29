@@ -1,0 +1,6 @@
+Verify the version
+psql --version
+
+connect to RDS from EC2
+psql -h terraform-20260429115823769800000001.cmzys4mao8xz.us-east-1.rds.amazonaws.com -U randomuser -d mydb -p 5432
+

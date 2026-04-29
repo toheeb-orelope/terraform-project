@@ -21,7 +21,7 @@ override.tf.json
 # CLI config files
 .terraformrc
 terraform.rc
-
+ssh_key_gen.txt
 debu.txt
 output.txt
 ifconfig.me
