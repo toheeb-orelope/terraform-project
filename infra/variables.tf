@@ -8,10 +8,10 @@ variable "aws_region" {
   type        = string
 }
 
-variable "dynamodb_table_name" {
-  description = "Name of the DynamoDB table for Terraform state locking"
-  type        = string
-}
+# variable "dynamodb_table_name" {
+#   description = "Name of the DynamoDB table for Terraform state locking"
+#   type        = string
+# }
 
 variable "account_id" {
   description = "AWS Account ID"
