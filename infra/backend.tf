@@ -5,7 +5,8 @@ terraform {
     key            = "envs/dev/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
-    kms_key_id     = "c93ada89-664e-4f3c-ac6a-c7e71d57cb1a"
-    dynamodb_table = "dynamodb-table1"
+    kms_key_id     = "eee61541-778a-4cd7-a0c4-b14457fffe4d"
+    use_lockfile = true
+    # dynamodb_table = "dynamodb-table1"
   }
 }
