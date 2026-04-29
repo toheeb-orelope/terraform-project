@@ -10,16 +10,16 @@ data "aws_ami" "amzn_linux_2023_ami" {
   }
 }
 
-# Create a key pair for EC2 instance
-resource "aws_key_pair" "key1" {
-  key_name   = "test"
-  public_key = file("${pathexpand("~/.ssh/test.pub")}")
+# # Create a key pair for EC2 instance
+# resource "aws_key_pair" "key1" {
+#   key_name   = "test"
+#   public_key = file("${pathexpand("~/.ssh/test.pub")}")
 
-  tags = {
-    Name        = "test"
-    environment = "dev"
-  }
-}
+#   tags = {
+#     Name        = "test"
+#     environment = "dev"
+#   }
+# }
 
 resource "aws_key_pair" "key2" {
   key_name   = "test"
@@ -37,7 +37,7 @@ resource "aws_instance" "instance1" {
   instance_type          = "t3.micro"
   subnet_id              = aws_subnet.public_subnet_1.id
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
-  key_name               = aws_key_pair.key1.key_name
+  key_name               = aws_key_pair.key2.key_name
   monitoring             = true
   user_data_base64       = base64encode(file("${path.module}/templates/user_data.sh"))
   metadata_options {
