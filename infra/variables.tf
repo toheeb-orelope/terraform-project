@@ -52,13 +52,3 @@ variable "ec2_public_key" {
   type      = string
   sensitive = true
 }
-
-resource "aws_key_pair" "key1" {
-  key_name   = "test"
-  public_key = var.ec2_public_key
-
-  tags = {
-    Name        = "test"
-    environment = "dev"
-  }
-}

@@ -21,6 +21,16 @@ resource "aws_key_pair" "key1" {
   }
 }
 
+resource "aws_key_pair" "key2" {
+  key_name   = "test"
+  public_key = var.ec2_public_key
+
+  tags = {
+    Name        = "test"
+    environment = "dev"
+  }
+}
+
 # Create EC2 instance in public subnet 1
 resource "aws_instance" "instance1" {
   ami                    = data.aws_ami.amzn_linux_2023_ami.id
