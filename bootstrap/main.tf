@@ -23,6 +23,7 @@ data "aws_region" "current" {}
 resource "aws_s3_bucket" "s3_bucket1" {
   bucket           = format("project-%s-%s-an", data.aws_caller_identity.current.account_id, data.aws_region.current.region)
   bucket_namespace = "account-regional"
+  force_destroy = true
 
   tags = {
     Name        = "project-bucket"
