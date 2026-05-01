@@ -37,3 +37,6 @@ output "vpc_id" {
 output "rds_port" {
   value = aws_db_instance.main_instance.port
 }
+
+
+

@@ -13,3 +13,5 @@ vpc_id = "vpc-06ba775163e0176c3"
 rds_port = 5432
 
 ec2-user@ip-10-0-1-182 
+
+openID Connect (OIDC)
